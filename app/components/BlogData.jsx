@@ -10,7 +10,7 @@ const BlogData = ({ id }) => {
 
   const getBlog = async (id) => {
     try {
-      const res = await axios.get(`/api/getBlogData/${id}`);
+      const res = await axios.post(`/api/getBlogData`,{id:id});
       return setData(res.data);
     } catch (error) {
       console.log(error);
@@ -22,7 +22,6 @@ const BlogData = ({ id }) => {
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(data);
   return (
     <div>
       <div className="flex md:flex-row flex-col-reverse gap-[50px] mt-9">
@@ -37,14 +36,16 @@ const BlogData = ({ id }) => {
           </div>
         </div>
         <div className="flex-1">
-          <div className="relative w-full h-[300px] md:h-[400px]">
+          <div className="relative w-full h-[300px] md:h-[400px] pr-3">
+           {data?.image &&
             <Image
-              className="object-cover"
-              src={data?.image}
-              fill
-              priority
-              alt="blog-img"
-            />
+            className="object-cover"
+            src={data?.image}
+            fill
+            priority
+            alt="blog-img"
+          />
+           }
           </div>
         </div>
       </div>
